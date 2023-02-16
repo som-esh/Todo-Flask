@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Task Master</h1>
+    {% if tasks|length < 1 %} <h4 style="text-align: center">There are no tasks. Create one!</h4>
+
+        {% else %}
+
+        <div class="container-fluid">
+            <div class="row mx-0 my-4 px-0 py-0">
+                <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1 mx-0 my-0 px-0 py-0">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 mx-0 my-0 px-0 py-0">
+                    <table>
+                        <tr>
+                            <th>Task</th>
+                            <th>Added</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% for task in tasks %}
+                        <div class="row my-3 mx-0  border border-primary rounded">
+                            <div class="col-8 mt-1 country-info">
+                                <p class="my-0">{{ task.content }}</p>
+                                <p class="my-0">{{ task.date_created.date() }}</p>
+                                <a href="/delete/{{ task.id }}">Delete</a>
+                                <br>
+                                <a href="/update/{{ task.id }}">Update</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </table>
+                    <div id="display_container"></div>
+                </div>
+
+                {% endif %}
+
+                <form action="/" method="POST" class="tex-center d-flex" role="search">
+                    <input type="text" name="content" id="content" class="form-control me-2" placeholder="Type Here"
+                        aria-label="Search">
+                    <input type="submit" value="Add Task" class="btn btn-primary">
+                </form>
+
+                <div class="col-lg-3 col-md-3 col-sm-1 col-xs-10 mx-0 my-0 px-0 py-0">
+                </div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}
